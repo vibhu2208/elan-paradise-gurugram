@@ -1128,8 +1128,8 @@ a { color: inherit; text-decoration: none; }
   height: 100%; 
   object-fit: cover;
   display: block;
-  filter: blur(8px);
-  transform: scale(1.03);
+  filter: none;
+  transform: scale(1);
   transition: all 0.3s ease;
 }
 .floor-plan-img .unlock-btn {
@@ -1161,10 +1161,7 @@ a { color: inherit; text-decoration: none; }
   text-align: center;
   background: #fff;
 }
-.floor-plan-card.unlocked .floor-plan-img img { 
-  filter: none; 
-  transform: scale(1); 
-}
+/* Floor plan images are now always visible - no unlock needed */
 .floor-plan-card.unlocked .unlock-btn { 
   display: none; 
 }
@@ -1199,8 +1196,8 @@ a { color: inherit; text-decoration: none; }
   height: 100%; 
   object-fit: cover;
   display: block;
-  filter: blur(8px);
-  transform: scale(1.03);
+  filter: none;
+  transform: scale(1);
   transition: all 0.3s ease;
 }
 .site-plan-img .unlock-btn {
@@ -1232,10 +1229,7 @@ a { color: inherit; text-decoration: none; }
   text-align: center;
   background: #fff;
 }
-.site-plan-card.unlocked .site-plan-img img { 
-  filter: none; 
-  transform: scale(1); 
-}
+/* Site plan images are now always visible - no unlock needed */
 .site-plan-card.unlocked .unlock-btn { 
   display: none; 
 }
@@ -1860,30 +1854,42 @@ input, textarea {
   }
   
   .footer-content {
-    grid-template-columns: 1fr;
-    gap: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
     margin-bottom: 30px;
   }
   
   .footer-left {
-    gap: 24px;
-  }
-  
-  .footer-title {
-    font-size: 24px;
-  }
-  
-  .footer-description {
-    font-size: 15px;
+    gap: 20px;
+    order: 1;
+    text-align: center;
   }
   
   .footer-form {
     max-width: 100%;
-    margin-left: 0;
+    margin: 0 auto;
+    order: 2;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .footer-title {
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+  
+  .footer-description {
+    font-size: 15px;
+    line-height: 1.5;
+    margin-bottom: 20px;
   }
   
   .footer-contact-form {
     padding: 24px;
+    margin: 0 auto;
+    max-width: 400px;
+    width: 100%;
   }
   
   .form-title {
@@ -1898,6 +1904,12 @@ input, textarea {
   .footer-submit-btn {
     padding: 14px 24px;
     font-size: 15px;
+    width: 100%;
+  }
+  
+  .contact-highlight {
+    margin: 0 auto;
+    max-width: 300px;
   }
 }
 
@@ -1907,24 +1919,41 @@ input, textarea {
   }
   
   .footer-content {
-    gap: 32px;
+    gap: 28px;
     margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
   }
   
   .footer-left {
-    gap: 20px;
+    gap: 16px;
+    order: 1;
+    text-align: center;
+  }
+  
+  .footer-form {
+    order: 2;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
   }
   
   .footer-title {
     font-size: 22px;
+    margin-bottom: 10px;
   }
   
   .footer-description {
     font-size: 14px;
+    line-height: 1.4;
+    margin-bottom: 16px;
   }
   
   .footer-contact-form {
     padding: 20px;
+    margin: 0 auto;
+    max-width: 350px;
+    width: 100%;
   }
   
   .form-fields {
@@ -1939,41 +1968,15 @@ input, textarea {
   .footer-submit-btn {
     padding: 12px 20px;
     font-size: 14px;
+    width: 100%;
   }
   
-  .contact-highlight {
-    padding: 20px;
-    gap: 16px;
-  }
-  
-  .contact-icon-wrapper {
-    width: 48px;
-    height: 48px;
-  }
-  
-  .contact-icon-wrapper svg {
-    width: 20px;
-    height: 20px;
-  }
-  
-  .contact-number {
-    font-size: 20px;
-  }
-  
-  .contact-label {
-    font-size: 13px;
-  }
-  
-  .contact-subtitle {
-    font-size: 12px;
-  }
-}
-
-@media (max-width: 480px) {
   .contact-highlight {
     padding: 16px;
-  gap: 12px; 
-}
+    gap: 12px;
+    margin: 0 auto;
+    max-width: 280px;
+  }
   
   .contact-icon-wrapper {
     width: 40px;
@@ -1997,6 +2000,7 @@ input, textarea {
     font-size: 11px;
   }
 }
+
 
 /* Location Section */
 .location-section {
@@ -2656,23 +2660,7 @@ input, textarea {
   box-shadow: none;
 }
 
-/* Footer Form Styling */
-.footer-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  align-items: center;
-  margin-bottom: 2rem;
-}
-.footer-left h3 {
-  color: var(--gold);
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
-}
-.footer-left p {
-  color: #ccc;
-  line-height: 1.6;
-}
+/* Footer Form Styling - Removed duplicate rules */
 .form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
