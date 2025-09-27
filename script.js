@@ -30,16 +30,74 @@ if (toggle && nav) {
   });
 }
 
-// Smooth scroll
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const id = a.getAttribute('href');
-    const el = document.querySelector(id);
-    if (el) {
+// Enhanced Smooth Scroll
+function smoothScrollTo(target, offset = 0) {
+  const element = typeof target === 'string' ? document.querySelector(target) : target;
+  if (!element) return;
+  
+  const headerHeight = document.querySelector('.site-header')?.offsetHeight || 0;
+  const targetPosition = element.offsetTop - headerHeight - offset;
+  
+  // Use native smooth scrolling if supported, otherwise fallback
+  if ('scrollBehavior' in document.documentElement.style) {
+    window.scrollTo({
+      top: targetPosition,
+      behavior: 'smooth'
+    });
+  } else {
+    // Fallback for older browsers
+    const startPosition = window.pageYOffset;
+    const distance = targetPosition - startPosition;
+    const duration = 800;
+    let start = null;
+    
+    function animation(currentTime) {
+      if (start === null) start = currentTime;
+      const timeElapsed = currentTime - start;
+      const progress = Math.min(timeElapsed / duration, 1);
+      
+      // Easing function (ease-out)
+      const ease = 1 - Math.pow(1 - progress, 3);
+      
+      window.scrollTo(0, startPosition + distance * ease);
+      
+      if (timeElapsed < duration) {
+        requestAnimationFrame(animation);
+      }
+    }
+    
+    requestAnimationFrame(animation);
+  }
+}
+
+// Enhanced smooth scroll for all anchor links
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', e => {
+    const href = link.getAttribute('href');
+    const target = document.querySelector(href);
+    
+    if (target) {
       e.preventDefault();
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      
+      // Close mobile menu if open
       nav?.classList.remove('open');
       toggle?.setAttribute('aria-expanded', 'false');
+      
+      // Smooth scroll with offset
+      smoothScrollTo(target, 20);
+    }
+  });
+});
+
+// Smooth scroll for buttons and other elements
+document.querySelectorAll('[data-scroll-to]').forEach(element => {
+  element.addEventListener('click', e => {
+    const target = element.getAttribute('data-scroll-to');
+    const targetElement = document.querySelector(target);
+    
+    if (targetElement) {
+      e.preventDefault();
+      smoothScrollTo(targetElement, 20);
     }
   });
 });
@@ -204,6 +262,64 @@ if (footerForm) handleFormSubmission(footerForm);
 // Footer year
 const y = document.getElementById('year');
 if (y) y.textContent = new Date().getFullYear();
+
+// Scroll to Top Button
+const scrollToTopBtn = document.getElementById('scroll-to-top');
+
+if (scrollToTopBtn) {
+  // Show/hide button based on scroll position
+  function toggleScrollToTop() {
+    if (window.pageYOffset > 300) {
+      scrollToTopBtn.classList.add('visible');
+    } else {
+      scrollToTopBtn.classList.remove('visible');
+    }
+  }
+
+  // Scroll to top functionality
+  scrollToTopBtn.addEventListener('click', () => {
+    smoothScrollTo('body', 0);
+  });
+
+  // Listen for scroll events
+  window.addEventListener('scroll', toggleScrollToTop);
+  
+  // Initial check
+  toggleScrollToTop();
+}
+
+// Enhanced mobile scroll behavior
+function enhanceMobileScroll() {
+  // Prevent overscroll bounce on iOS
+  document.body.addEventListener('touchmove', function(e) {
+    if (e.target.closest('.carousel-viewport, .amenities-viewport')) {
+      return; // Allow scrolling in carousels
+    }
+    
+    const target = e.target.closest('.scroll-container');
+    if (!target) {
+      e.preventDefault();
+    }
+  }, { passive: false });
+  
+  // Smooth scroll for mobile navigation
+  if ('ontouchstart' in window) {
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('touchstart', (e) => {
+        const href = link.getAttribute('href');
+        const target = document.querySelector(href);
+        
+        if (target) {
+          e.preventDefault();
+          smoothScrollTo(target, 10); // Smaller offset for mobile
+        }
+      }, { passive: false });
+    });
+  }
+}
+
+// Initialize mobile enhancements
+enhanceMobileScroll();
 
 // Gallery Carousel (vanilla JS)
 (function initCarousel(){
