@@ -84,7 +84,7 @@ a { color: inherit; text-decoration: none; }
 /* Hero */
 .hero {
   height: 85vh;
-  background: url('images/hero-image-desktop.jpg') center/cover no-repeat;
+  background: url('images/image1.webp') center/cover no-repeat;
   border-bottom: 1px solid var(--border);
 }
 
