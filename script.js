@@ -290,22 +290,29 @@ if (scrollToTopBtn) {
 
 // Enhanced mobile scroll behavior
 function enhanceMobileScroll() {
-  // Prevent overscroll bounce on iOS
-  document.body.addEventListener('touchmove', function(e) {
-    if (e.target.closest('.carousel-viewport, .amenities-viewport')) {
-      return; // Allow scrolling in carousels
-    }
-    
-    const target = e.target.closest('.scroll-container');
-    if (!target) {
-      e.preventDefault();
-    }
-  }, { passive: false });
+  // Only prevent overscroll bounce on specific carousel elements, not the entire body
+  document.querySelectorAll('.carousel-viewport, .amenities-viewport').forEach(viewport => {
+    viewport.addEventListener('touchmove', function(e) {
+      // Allow normal scrolling within carousels, only prevent overscroll
+      const scrollTop = viewport.scrollTop;
+      const scrollHeight = viewport.scrollHeight;
+      const clientHeight = viewport.clientHeight;
+      
+      // Prevent overscroll at top
+      if (scrollTop <= 0 && e.touches[0].clientY > e.touches[0].clientY) {
+        e.preventDefault();
+      }
+      // Prevent overscroll at bottom
+      if (scrollTop >= scrollHeight - clientHeight && e.touches[0].clientY < e.touches[0].clientY) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+  });
   
-  // Smooth scroll for mobile navigation
+  // Smooth scroll for mobile navigation with better touch handling
   if ('ontouchstart' in window) {
     document.querySelectorAll('a[href^="#"]').forEach(link => {
-      link.addEventListener('touchstart', (e) => {
+      link.addEventListener('touchend', (e) => {
         const href = link.getAttribute('href');
         const target = document.querySelector(href);
         
@@ -313,7 +320,7 @@ function enhanceMobileScroll() {
           e.preventDefault();
           smoothScrollTo(target, 10); // Smaller offset for mobile
         }
-      }, { passive: false });
+      });
     });
   }
 }
