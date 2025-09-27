@@ -812,31 +812,100 @@ a { color: inherit; text-decoration: none; }
   padding: 12px 0;
 }
 .feature-points {
-  list-style: none; margin: 0 0 20px; padding: 0;
-  display: grid; gap: 12px;
+  margin: 0 0 20px; 
+  padding: 0;
+  display: grid; 
+  gap: 20px;
 }
-.feature-points li {
-  display: flex; align-items: flex-start; gap: 10px;
-  color: #333;
-  line-height: 1.5;
+
+.feature-item {
   position: relative;
+  padding-left: 20px;
 }
-.feature-points li::before {
+
+.feature-item::before {
   content: '';
-  width: 6px; height: 6px; border-radius: 50%;
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 8px; 
+  height: 8px; 
+  border-radius: 50%;
   background: var(--gold);
-  margin-top: 9px;
-  flex: 0 0 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
-.feature-points .hl { 
-  color: var(--gold-600); 
-  font-weight: 700; 
-  white-space: nowrap; /* keep key phrase together */
-  display: inline-block;
-  margin-right: 3px; 
-  margin-left: -2px; /* consistent gap before following text */
+
+.feature-heading {
+  color: var(--gold-600);
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 6px 0;
+  line-height: 1.3;
+  letter-spacing: 0.3px;
 }
-.feature-points li { word-break: normal; }
+
+.feature-subheading {
+  color: #555;
+  font-size: 15px;
+  font-weight: 400;
+  margin: 0;
+  line-height: 1.5;
+  opacity: 0.9;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .feature-points {
+    gap: 18px;
+  }
+  
+  .feature-item {
+    padding-left: 18px;
+  }
+  
+  .feature-item::before {
+    width: 6px;
+    height: 6px;
+    top: 6px;
+  }
+  
+  .feature-heading {
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+  
+  .feature-subheading {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+}
+
+@media (max-width: 480px) {
+  .feature-points {
+    gap: 16px;
+  }
+  
+  .feature-item {
+    padding-left: 16px;
+  }
+  
+  .feature-item::before {
+    width: 5px;
+    height: 5px;
+    top: 5px;
+  }
+  
+  .feature-heading {
+    font-size: 15px;
+    margin-bottom: 3px;
+    letter-spacing: 0.2px;
+  }
+  
+  .feature-subheading {
+    font-size: 13px;
+    line-height: 1.3;
+  }
+}
 .feature-cta {
   background: var(--gold);
   color: #fff;
