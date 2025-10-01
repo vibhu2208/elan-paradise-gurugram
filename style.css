@@ -2905,3 +2905,364 @@ input, textarea {
     font-size: 14px;
   }
 }
+
+/* Related Projects Section */
+.related-projects-section {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 80px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.related-projects-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--gold) 50%, transparent 100%);
+}
+
+.related-projects-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.related-projects-title {
+  font-family: "GFS Didot", serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 16px;
+  position: relative;
+}
+
+.related-projects-title::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: var(--gold);
+  border-radius: 2px;
+}
+
+.related-projects-subtitle {
+  font-size: 18px;
+  color: #666;
+  margin: 0;
+  font-weight: 400;
+}
+
+.related-projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.project-card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s ease;
+  border: 1px solid rgba(185, 151, 91, 0.1);
+  position: relative;
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  border-color: var(--gold);
+}
+
+.project-image {
+  position: relative;
+  height: 240px;
+  overflow: hidden;
+}
+
+.project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.project-card:hover .project-image img {
+  transform: scale(1.05);
+}
+
+.project-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 100%);
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.project-card:hover .project-overlay {
+  opacity: 1;
+}
+
+.project-logo {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 8px;
+  padding: 8px 12px;
+  backdrop-filter: blur(10px);
+}
+
+.logo-text {
+  font-family: "GFS Didot", serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--gold);
+  text-transform: lowercase;
+  letter-spacing: 1px;
+}
+
+.logo-icon {
+  font-family: "GFS Didot", serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #1a1a1a;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.imperial-logo,
+.presidential-logo,
+.paradise-logo {
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+}
+
+.project-content {
+  padding: 24px;
+  background: #fff;
+}
+
+.project-title {
+  font-family: "GFS Didot", serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 8px;
+  letter-spacing: 0.5px;
+}
+
+.project-location {
+  font-size: 14px;
+  color: var(--gold);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0 0 8px;
+}
+
+.project-tagline {
+  font-size: 16px;
+  color: #666;
+  margin: 0 0 16px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.project-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.feature-tag {
+  background: rgba(185, 151, 91, 0.1);
+  color: var(--gold-600);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: 1px solid rgba(185, 151, 91, 0.2);
+}
+
+.project-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.project-explore-btn {
+  background: linear-gradient(135deg, var(--gold) 0%, #d4af37 100%);
+  color: #1a1a1a;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(185, 151, 91, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  flex: 1;
+  max-width: 140px;
+}
+
+.project-explore-btn:hover {
+  background: linear-gradient(135deg, #d4af37 0%, var(--gold) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(185, 151, 91, 0.4);
+}
+
+.contact-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.contact-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  border: 2px solid transparent;
+}
+
+.phone-btn {
+  background: #25d366;
+  color: #fff;
+  border-color: #25d366;
+}
+
+.phone-btn:hover {
+  background: #128c7e;
+  border-color: #128c7e;
+  transform: scale(1.1);
+}
+
+.whatsapp-btn {
+  background: #25d366;
+  color: #fff;
+  border-color: #25d366;
+}
+
+.whatsapp-btn:hover {
+  background: #128c7e;
+  border-color: #128c7e;
+  transform: scale(1.1);
+}
+
+/* Related Projects Responsive */
+@media (max-width: 768px) {
+  .related-projects-section {
+    padding: 60px 0;
+  }
+  
+  .related-projects-title {
+    font-size: 28px;
+  }
+  
+  .related-projects-subtitle {
+    font-size: 16px;
+  }
+  
+  .related-projects-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  .project-image {
+    height: 200px;
+  }
+  
+  .project-content {
+    padding: 20px;
+  }
+  
+  .project-title {
+    font-size: 20px;
+  }
+  
+  .project-tagline {
+    font-size: 15px;
+  }
+  
+  .project-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  
+  .project-explore-btn {
+    width: 100%;
+    max-width: none;
+    padding: 14px 24px;
+  }
+  
+  .contact-buttons {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .related-projects-section {
+    padding: 40px 0;
+  }
+  
+  .related-projects-title {
+    font-size: 24px;
+  }
+  
+  .related-projects-subtitle {
+    font-size: 15px;
+  }
+  
+  .project-image {
+    height: 180px;
+  }
+  
+  .project-content {
+    padding: 16px;
+  }
+  
+  .project-title {
+    font-size: 18px;
+  }
+  
+  .project-tagline {
+    font-size: 14px;
+  }
+  
+  .feature-tag {
+    font-size: 11px;
+    padding: 3px 10px;
+  }
+  
+  .project-explore-btn {
+    padding: 12px 20px;
+    font-size: 13px;
+  }
+  
+  .contact-btn {
+    width: 36px;
+    height: 36px;
+  }
+}
